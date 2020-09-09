@@ -23,40 +23,40 @@ describe OysterCard do
         expect{subject.send(:deduct, 5)}.to change{(subject.balance)}.from(10).to(5)
     end
 
-    it "Touch in oyster should show true for in_journey?" do
-        subject.top_up(10)
-        subject.touch_in(station)
-        expect(subject.in_journey?).to be true
-    end
+    # it "Touch in oyster should show true for in_journey?" do
+    #     subject.top_up(10)
+    #     subject.touch_in(station)
+    #     expect(subject.in_journey?).to be true
+    # end
 
-    it "Touch out oyster should show false for in_journey?" do
-        subject.touch_out('stratford')
-        expect(subject.in_journey?).to be false
-    end    
+    # it "Touch out oyster should show false for in_journey?" do
+    #     subject.touch_out('stratford')
+    #     expect(subject.in_journey?).to be false
+    # end    
 
     it "does oyster card show error if there is no balance" do
-        expect{subject.touch_in(station)}.to raise_error"No Money"
+        expect{subject.touch_in}.to raise_error"No Money"
     end
 
     it 'we have the correct balance after touching out' do 
-      expect {subject.touch_out('stratford')}.to change{(subject.balance)}.by(-(OysterCard::MINIMUM_LIMIT))
+      expect {subject.touch_out}.to change{(subject.balance)}.by(-(OysterCard::MINIMUM_LIMIT))
     end 
 
-    it "store entry station" do
-        subject.top_up(10)
-        subject.touch_in(station)
-    expect(subject.entry_station).to eq station
-    end
+    # it "store entry station" do
+    #     subject.top_up(10)
+    #     subject.touch_in(station)
+    # expect(subject.entry_station).to eq station
+    # end
 
-    it "checks that a new oyster has no journeys by default" do
-      expect(subject.journeys).to eq ({})
-    end 
+    # it "checks that a new oyster has no journeys by default" do
+    #   expect(subject.journeys).to eq ({})
+    # end 
 
-    it 'check that touching in and out gives one journey' do 
-      subject.top_up(10)
-      subject.touch_in(station)
-      subject.touch_out(exit_station)
-      expect(subject.journeys).to eq ({"Entry_station" => station, "Exit_station" => exit_station})
-    end 
+    # it 'check that touching in and out gives one journey' do 
+    #   subject.top_up(10)
+    #   subject.touch_in(station)
+    #   subject.touch_out(exit_station)
+    #   expect(subject.journeys).to eq ({"Entry_station" => station, "Exit_station" => exit_station})
+    # end 
 
 end    
