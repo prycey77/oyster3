@@ -27,7 +27,8 @@ class OysterCard
     end    
 
     def touch_out(exit_station)
-      @journeys[@entry_station] = exit_station  
+      @journeys["Entry_station"] = @entry_station  
+      @journeys["Exit_station"] = exit_station 
       @entry_station = nil  
       deduct(MINIMUM_LIMIT)
     end    
