@@ -2,6 +2,7 @@ require 'oyster_card'
 
 describe OysterCard do
     let(:station) { double :station }
+    let(:exit_station) { double :exit_station }
 
     it "Balance of oyster card equals 0" do
         expect(subject.balance).to eq 0
@@ -29,7 +30,7 @@ describe OysterCard do
     end
 
     it "Touch out oyster should show false for in_journey?" do
-        subject.touch_out
+        subject.touch_out('stratford')
         expect(subject.in_journey?).to be false
     end    
 
@@ -38,7 +39,7 @@ describe OysterCard do
     end
 
     it 'we have the correct balance after touching out' do 
-      expect {subject.touch_out}.to change{(subject.balance)}.by(-(OysterCard::MINIMUM_LIMIT))
+      expect {subject.touch_out('stratford')}.to change{(subject.balance)}.by(-(OysterCard::MINIMUM_LIMIT))
     end 
 
     it "store entry station" do
@@ -46,5 +47,16 @@ describe OysterCard do
         subject.touch_in(station)
     expect(subject.entry_station).to eq station
     end
+
+    it "checks that a new oyster has no journeys by default" do
+      expect(subject.journeys).to eq ({})
+    end 
+
+    it 'check that touching in and out gives one journey' do 
+      subject.top_up(10)
+      subject.touch_in(station)
+      subject.touch_out(exit_station)
+      expect(subject.journeys).to eq ({station => exit_station})
+    end 
 
 end    
