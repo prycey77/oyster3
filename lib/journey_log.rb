@@ -17,7 +17,15 @@ attr_reader :entry_station, :journeys
       @journeys << @exit_station
     end
 
+
+
 private
+
+    def journeys
+
+      @journeys.dup
+    
+    end
 
     def current_journey
       if !@exit_station.nil?
