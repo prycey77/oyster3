@@ -1,13 +1,15 @@
 class JourneyLog
+attr_reader :entry_station
 
-
-    def initialize(journey_class = Journey.new)
-      @journey = journey_class
+    def initialize(journey_class = Journey )
+      @journey = journey_class.new
       @journeys = []
+      @entry_station = entry_station
     end
 
     def start(station)
-      @journey.start(station) 
+     @entry_station = @journey.start(station) 
+     @entry_station
     end
 
     def current_journey
