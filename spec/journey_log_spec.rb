@@ -8,15 +8,20 @@ describe JourneyLog do
     expect(subject.start(station)).to eq station
   end
   
-  
+  # it "Starts a journey" do
+  #  expect(journey_class).to receive(:new).with(entry_station: station)
+  #  subject.start(station)
+  # end
 
-  it "Starts a journey" do
-    expect(:journey_class).to receive(:new).with(entry_station: station)
+   it "records a new journey" do
+     allow(journey_class).to receive(:new).and_return journey
+   end
+
+   it "should return an incomplete journey or create a new journey" do
     subject.start(station)
- end
+    expect(subject.current_journey).to eq station
+   end
 
+   
 
- it "records a new journey" do
-  allow(journey_class).to receive(:new).and_return journey
- end
 end
