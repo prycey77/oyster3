@@ -1,35 +1,37 @@
 class JourneyLog
 attr_reader :entry_station, :journeys
 
-    def initialize(journey = Journey.new)
-      @journey = journey
+    def initialize
+      @journey = Journey.new
       @journeys = []
+      @current_journey = nil
     end
 
     def start(station)
-     @entry_station = @journey.start(station) 
-     @journeys << @entry_station
+      entry_station = @journey.start(station)
+      @current_journey.nil? ? createjourney(entry_station) : @journeys
+   
     end
 
-    def finish(station)
-      @exit_station = @journey.finish(station) 
-      @journeys << @exit_station
+    def finish(departure)  
+      @journeys << @journey.finish(departure)
     end
 
-    def journeys
 
-      @journeys.dup
-    
-    end
 
   private
 
-    def current_journey
-      if !@exit_station.nil?
-        @current_journey = nil
-      else
-      @current_journey ||= @journey
-      end
+    def createjourney(station)
+      @journeys << station
+      @journey.finish(departure)      
     end
+ 
+
+    def current_journey
+      
+      @current_journey ||= @journey
+      
+    end
+  
 
 end
