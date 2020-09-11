@@ -4,7 +4,6 @@ attr_reader :entry_station, :journeys
     def initialize(journey = Journey.new)
       @journey = journey
       @journeys = []
-      @entry_station = entry_station
     end
 
     def start(station)
@@ -17,15 +16,13 @@ attr_reader :entry_station, :journeys
       @journeys << @exit_station
     end
 
-
-
-private
-
     def journeys
 
       @journeys.dup
     
     end
+
+  private
 
     def current_journey
       if !@exit_station.nil?
