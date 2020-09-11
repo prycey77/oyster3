@@ -37,5 +37,11 @@ describe Journey do
     subject.start(station)
     expect(subject.calculate_fare).to eq Journey::PENALTY_FARE
   end
+
+  it 'charges GBP1 for journey that does not cross zone boundary' do 
+    waterloo = Station.new("waterloo", 1)
+    paddington = Station.new("paddington", 1)
+
+  end
   
 end

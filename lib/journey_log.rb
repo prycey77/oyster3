@@ -1,5 +1,5 @@
 class JourneyLog
-attr_reader :entry_station, :journeys
+attr_reader :entry_station
 
     def initialize
       @journey = Journey.new
@@ -17,13 +17,15 @@ attr_reader :entry_station, :journeys
       @journeys << @journey.finish(departure)
     end
 
-
+    def show_history
+      @journeys.dup
+    end
 
   private
 
     def createjourney(station)
       @journeys << station
-      @journey.finish(departure)      
+      @journey.finish(station)      
     end
  
 
@@ -32,6 +34,10 @@ attr_reader :entry_station, :journeys
       @current_journey ||= @journey
       
     end
+
+    def journeys
+      
+    end 
   
 
 end
